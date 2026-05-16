@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduVerse College – Excellence in Education</title>
+  <meta name="description" content="EduVerse College offers world-class education with cutting-edge programs, expert faculty, and a vibrant campus life." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ══ CSS Variables ══ */
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      --dark: #0f172a;
+      --dark-2: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --gray-light: #e2e8f0;
+      --white: #ffffff;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.14);
+      --transition: all 0.3s ease;
+      --font: 'Poppins', sans-serif;
+      --font-heading: 'Sora', sans-serif;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --card-bg: #ffffff;
+      --nav-bg: rgba(255,255,255,0.95);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --card-bg: #1e293b;
+      --nav-bg: rgba(15,23,42,0.97);
+      --light: #1e293b;
+      --gray-light: #334155;
+      --gray: #94a3b8;
+      --white: #1e293b;
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font); background:var(--bg); color:var(--text); line-height:1.7; transition:var(--transition); }
+    h1,h2,h3,h4,h5 { font-family:var(--font-heading); }
+    a { text-decoration:none; color:inherit; }
+
+    /* ══ Loading Screen ══ */
+    #loading-screen {
+      position:fixed; inset:0; background:var(--dark);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      z-index:9999; transition:opacity 0.5s ease;
+    }
+    #loading-screen.hidden { opacity:0; pointer-events:none; }
+    .loader-logo { font-family:var(--font-heading); font-size:2.5rem; font-weight:800; color:#fff; }
+    .loader-logo span { color:var(--accent); }
+    .loader-bar { width:200px; height:4px; background:rgba(255,255,255,0.2); border-radius:2px; margin-top:1.5rem; overflow:hidden; }
+    .loader-bar-inner { width:0; height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:2px; animation:loading 2s ease forwards; }
+    @keyframes loading { to { width:100%; } }
+
+    /* ══ Navbar ══ */
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:var(--nav-bg); backdrop-filter:blur(12px);
+      box-shadow:0 2px 20px rgba(0,0,0,0.08);
+      padding:0.75rem 0; transition:var(--transition);
+    }
+    .nav-logo { font-family:var(--font-heading); font-size:1.5rem; font-weight:800; color:var(--text); }
+    .nav-logo span { color:var(--primary); }
+    .navbar-nav .nav-link {
+      color:var(--text) !important; font-weight:500; font-size:0.92rem;
+      padding:0.4rem 0.75rem !important; border-radius:6px;
+      transition:var(--transition); position:relative;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active { color:var(--primary) !important; background:rgba(79,70,229,0.08); }
+    .dark-toggle {
+      background:none; border:2px solid var(--gray-light);
+      border-radius:8px; width:38px; height:38px;
+      cursor:pointer; font-size:1rem; transition:var(--transition);
+      color:var(--text);
+    }
+    .dark-toggle:hover { border-color:var(--primary); }
+    .navbar-toggler { border:none !important; outline:none !important; box-shadow:none !important; color:var(--text); }
+
+    /* ══ Buttons ══ */
+    .btn-primary-custom {
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff; border:none; padding:0.6rem 1.4rem; border-radius:8px;
+      font-weight:600; font-size:0.9rem; transition:var(--transition);
+      display:inline-flex; align-items:center; gap:0.4rem;
+    }
+    .btn-primary-custom:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(79,70,229,0.35); color:#fff; }
+    .btn-outline-custom {
+      background:transparent; color:var(--text);
+      border:2px solid var(--gray-light); padding:0.6rem 1.4rem;
+      border-radius:8px; font-weight:600; font-size:0.9rem;
+      transition:var(--transition); display:inline-flex; align-items:center; gap:0.4rem;
+    }
+    .btn-outline-custom:hover { border-color:var(--primary); color:var(--primary); }
+    .btn-white-custom {
+      background:#fff; color:var(--primary); border:none;
+      padding:0.75rem 1.8rem; border-radius:8px;
+      font-weight:700; font-size:1rem; transition:var(--transition);
+      display:inline-flex; align-items:center; gap:0.5rem;
+    }
+    .btn-white-custom:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,0,0,0.2); color:var(--primary); }
+    .btn-ghost-white {
+      background:transparent; color:#fff;
+      border:2px solid rgba(255,255,255,0.5);
+      padding:0.75rem 1.8rem; border-radius:8px;
+      font-weight:700; font-size:1rem; transition:var(--transition);
+      display:inline-flex; align-items:center; gap:0.5rem;
+    }
+    .btn-ghost-white:hover { border-color:#fff; background:rgba(255,255,255,0.1); color:#fff; }
+
+    /* ══ Hero Section ══ */
+    .hero {
+      min-height:100vh; position:relative;
+      display:flex; flex-direction:column; justify-content:center;
+      padding-top:80px; overflow:hidden;
+    }
+    .hero-bg { position:absolute; inset:0; z-index:0; }
+    .hero-slide {
+      position:absolute; inset:0; opacity:0;
+      transition:opacity 1.2s ease;
+    }
+    .hero-slide.active { opacity:1; }
+    .hero-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.35); }
+    .hero-content { position:relative; z-index:2; color:#fff; padding:4rem 0 8rem; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(255,255,255,0.15); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.25); border-radius:50px;
+      padding:0.4rem 1rem; font-size:0.8rem; font-weight:600;
+      color:#fff; margin-bottom:1.5rem; letter-spacing:0.05em;
+    }
+    .hero-content h1 { font-size:clamp(2rem,5vw,3.8rem); font-weight:800; line-height:1.15; margin-bottom:1.25rem; }
+    .hero-content p { font-size:1.15rem; opacity:0.9; margin-bottom:2rem; }
+    .typing-text { color:var(--accent); }
+    .hero-dots { position:absolute; bottom:120px; left:50%; transform:translateX(-50%); z-index:3; display:flex; gap:0.5rem; }
+    .hero-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.4); cursor:pointer; transition:var(--transition); }
+    .hero-dot.active { background:#fff; transform:scale(1.3); }
+
+    /* Stats Bar */
+    .hero-stats {
+      position:absolute; bottom:0; left:0; right:0; z-index:3;
+      background:rgba(15,23,42,0.85); backdrop-filter:blur(12px);
+    }
+    .hero-stat-card { text-align:center; padding:1.25rem 1rem; border-right:1px solid rgba(255,255,255,0.1); }
+    .hero-stat-card:last-child { border-right:none; }
+    .hero-stat-card .num { font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--accent); }
+    .hero-stat-card .label { color:rgba(255,255,255,0.7); font-size:0.8rem; margin-top:0.2rem; }
+
+    /* ══ Section Common ══ */
+    .section-badge {
+      display:inline-block; background:rgba(79,70,229,0.1);
+      color:var(--primary); font-size:0.8rem; font-weight:700;
+      padding:0.3rem 1rem; border-radius:50px;
+      letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.75rem;
+    }
+    .section-title { font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:800; margin-bottom:1rem; color:var(--text); }
+    .gradient-text { background:linear-gradient(135deg,var(--primary),var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .section-desc { color:var(--gray); font-size:1rem; max-width:600px; margin:0 auto; }
+
+    /* ══ Feature Cards ══ */
+    .feature-card {
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      padding:2rem 1.5rem; box-shadow:var(--shadow);
+      transition:var(--transition); border:1px solid var(--gray-light);
+      text-align:center; height:100%;
+    }
+    .feature-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--primary); }
+    .feature-card .icon {
+      width:64px; height:64px; border-radius:16px; margin:0 auto 1.25rem;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; color:#fff;
+    }
+    .feature-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:0.6rem; color:var(--text); }
+    .feature-card p { color:var(--gray); font-size:0.9rem; }
+
+    /* ══ Stats Section ══ */
+    .stats-section {
+      background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);
+      padding:4rem 0;
+    }
+    .stat-item { text-align:center; padding:1rem; }
+    .stat-item .num { font-family:var(--font-heading); font-size:2.5rem; font-weight:800; color:#fff; }
+    .stat-item .plus { font-size:1.5rem; color:rgba(255,255,255,0.7); }
+    .stat-item .label { color:rgba(255,255,255,0.8); font-size:0.9rem; margin-top:0.3rem; }
+
+    /* ══ Course Cards ══ */
+    .course-card {
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); border:1px solid var(--gray-light);
+      transition:var(--transition); overflow:hidden; display:flex; flex-direction:column; height:100%;
+    }
+    .course-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .course-img { height:160px; position:relative; overflow:hidden; }
+    .course-badge {
+      position:absolute; top:12px; left:12px;
+      background:var(--primary); color:#fff;
+      padding:0.2rem 0.75rem; border-radius:50px; font-size:0.75rem; font-weight:700;
+    }
+    .course-body { padding:1.25rem; flex:1; }
+    .course-body h3 { font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text); }
+    .course-meta { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem; }
+    .course-meta span { font-size:0.78rem; color:var(--gray); display:flex; align-items:center; gap:0.25rem; }
+    .course-body p { color:var(--gray); font-size:0.85rem; }
+    .course-footer { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.25rem; border-top:1px solid var(--gray-light); }
+    .course-price { font-family:var(--font-heading); font-weight:800; color:var(--primary); font-size:1rem; }
+    .course-price small { color:var(--gray); font-size:0.75rem; font-weight:400; }
+
+    /* ══ Why Us ══ */
+    .experience-badge {
+      position:absolute; bottom:-20px; right:-20px;
+      background:linear-gradient(135deg,var(--accent),#ef4444);
+      border-radius:var(--radius); padding:1rem 1.5rem; text-align:center; color:#fff;
+    }
+    .experience-badge .num { font-family:var(--font-heading); font-size:2rem; font-weight:800; }
+    .check-list { list-style:none; padding:0; margin:0 0 2rem 0; }
+    .check-item { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
+    .check { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; flex-shrink:0; margin-top:2px; }
+
+    /* ══ Faculty Cards ══ */
+    .faculty-card {
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); border:1px solid var(--gray-light);
+      transition:var(--transition); overflow:hidden; text-align:center; height:100%;
+    }
+    .faculty-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .faculty-img { height:180px; position:relative; overflow:hidden; }
+    .faculty-overlay {
+      position:absolute; inset:0; background:rgba(79,70,229,0.85);
+      display:flex; align-items:center; justify-content:center; gap:1rem;
+      opacity:0; transition:var(--transition);
+    }
+    .faculty-card:hover .faculty-overlay { opacity:1; }
+    .faculty-overlay .social-link { color:#fff; font-size:1.2rem; transition:var(--transition); }
+    .faculty-overlay .social-link:hover { color:var(--accent); }
+    .faculty-body { padding:1.25rem; }
+    .faculty-body h3 { font-size:1rem; font-weight:700; color:var(--text); }
+    .faculty-body .dept { color:var(--primary); font-size:0.8rem; font-weight:600; margin:0.25rem 0; }
+    .faculty-body p { color:var(--gray); font-size:0.82rem; }
+
+    /* ══ Testimonials ══ */
+    .testimonial-card {
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      padding:2rem; box-shadow:var(--shadow); border:1px solid var(--gray-light);
+      height:100%;
+    }
+    .stars { color:var(--accent); font-size:1.1rem; margin-bottom:1rem; }
+    .testimonial-card .text { color:var(--gray); font-size:0.9rem; font-style:italic; margin-bottom:1.5rem; }
+    .testimonial-author { display:flex; align-items:center; gap:0.75rem; }
+    .testimonial-author .name { font-weight:700; font-size:0.9rem; color:var(--text); }
+    .testimonial-author .role { font-size:0.78rem; color:var(--gray); }
+
+    /* ══ Blog Cards ══ */
+    .blog-card {
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); border:1px solid var(--gray-light);
+      transition:var(--transition); overflow:hidden; height:100%;
+    }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .blog-img { height:160px; overflow:hidden; }
+    .blog-body { padding:1.25rem; }
+    .blog-meta { display:flex; gap:1rem; margin-bottom:0.75rem; }
+    .blog-meta span { font-size:0.78rem; color:var(--gray); display:flex; align-items:center; gap:0.3rem; }
+    .blog-body h3 { font-size:0.95rem; font-weight:700; color:var(--text); margin-bottom:0.5rem; }
+    .blog-body p { color:var(--gray); font-size:0.85rem; margin-bottom:1rem; }
+    .read-more { color:var(--primary); font-weight:600; font-size:0.85rem; display:inline-flex; align-items:center; gap:0.3rem; transition:var(--transition); }
+    .read-more:hover { gap:0.6rem; color:var(--primary-dark); }
+
+    /* ══ Newsletter ══ */
+    .newsletter-section {
+      background:linear-gradient(135deg,var(--dark) 0%,var(--primary) 100%);
+      padding:5rem 0; text-align:center; color:#fff;
+    }
+    .newsletter-section h2 { font-size:2rem; font-weight:800; margin-bottom:0.75rem; }
+    .newsletter-section p { opacity:0.8; margin-bottom:2rem; }
+    .newsletter-form { display:flex; gap:0.75rem; max-width:500px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+    .newsletter-form input {
+      flex:1; min-width:240px; padding:0.75rem 1.25rem;
+      border-radius:8px; border:none; font-family:var(--font); font-size:0.95rem;
+      outline:none;
+    }
+
+    /* ══ Footer ══ */
+    .footer { background:var(--dark); color:rgba(255,255,255,0.75); padding:4rem 0 0; }
+    .footer h4 { color:#fff; font-weight:700; margin-bottom:1.25rem; font-size:1rem; }
+    .footer-brand p { opacity:0.7; font-size:0.9rem; margin:1rem 0 1.5rem; }
+    .footer-links { list-style:none; padding:0; }
+    .footer-links li { margin-bottom:0.5rem; }
+    .footer-links a { color:rgba(255,255,255,0.65); font-size:0.88rem; transition:var(--transition); }
+    .footer-links a:hover { color:var(--accent); padding-left:4px; }
+    .footer-contact { list-style:none; padding:0; }
+    .footer-contact li { display:flex; gap:0.75rem; align-items:flex-start; margin-bottom:0.75rem; font-size:0.85rem; }
+    .footer-contact i { color:var(--accent); margin-top:3px; width:14px; flex-shrink:0; }
+    .social-links { display:flex; gap:0.5rem; }
+    .social-link-footer {
+      width:36px; height:36px; border-radius:8px;
+      background:rgba(255,255,255,0.1); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.9rem; transition:var(--transition);
+    }
+    .social-link-footer:hover { background:var(--primary); color:#fff; transform:translateY(-2px); }
+    .footer-bottom {
+      border-top:1px solid rgba(255,255,255,0.1);
+      padding:1.5rem 0; margin-top:3rem;
+      display:flex; flex-wrap:wrap; justify-content:space-between;
+      gap:0.5rem; font-size:0.82rem; opacity:0.6;
+    }
+    .footer-bottom a { color:var(--accent); }
+
+    /* ══ WhatsApp Float ══ */
+    .wa-float { position:fixed; bottom:2rem; right:2rem; z-index:999; }
+    .wa-btn {
+      width:56px; height:56px; border-radius:50%;
+      background:#25d366; color:#fff; border:none;
+      font-size:1.5rem; cursor:pointer; box-shadow:0 4px 20px rgba(37,211,102,0.4);
+      transition:var(--transition); display:flex; align-items:center; justify-content:center;
+    }
+    .wa-btn:hover { transform:scale(1.1); }
+    .wa-popup {
+      position:absolute; bottom:70px; right:0; width:300px;
+      background:var(--card-bg); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-lg); overflow:hidden;
+      display:none;
+    }
+    .wa-popup.show { display:block; animation:slideUp 0.3s ease; }
+    @keyframes slideUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .wa-popup-header { background:#25d366; color:#fff; padding:1rem; display:flex; gap:0.75rem; align-items:center; }
+    .wa-avatar { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .wa-popup-header h4 { margin:0; font-size:0.9rem; }
+    .wa-popup-header p { margin:0; font-size:0.75rem; opacity:0.85; }
+    .wa-popup-body { padding:1rem; }
+    .wa-popup-body label { font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:0.25rem; display:block; }
+    .wa-popup-body input, .wa-popup-body textarea { width:100%; border:1px solid var(--gray-light); border-radius:8px; padding:0.5rem 0.75rem; font-family:var(--font); font-size:0.85rem; background:var(--bg); color:var(--text); margin-bottom:0.75rem; }
+    .wa-send-btn { width:100%; background:#25d366; color:#fff; border:none; border-radius:8px; padding:0.65rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:var(--transition); }
+    .wa-send-btn:hover { background:#1ebe5a; }
+
+    /* ══ Back to Top ══ */
+    #back-to-top {
+      position:fixed; bottom:6rem; right:2rem; z-index:999;
+      width:42px; height:42px; border-radius:10px;
+      background:var(--primary); color:#fff; border:none;
+      font-size:1rem; cursor:pointer; box-shadow:var(--shadow);
+      transition:var(--transition); opacity:0; pointer-events:none;
+      display:flex; align-items:center; justify-content:center;
+    }
+    #back-to-top.show { opacity:1; pointer-events:auto; }
+    #back-to-top:hover { transform:translateY(-3px); }
+
+    /* ══ Reveal Animations ══ */
+    .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-zoom { opacity:0; transform:scale(0.9); transition:all 0.6s ease; }
+    .reveal-zoom.visible { opacity:1; transform:scale(1); }
+    .reveal-left { opacity:0; transform:translateX(-40px); transition:all 0.7s ease; }
+    .reveal-left.visible { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(40px); transition:all 0.7s ease; }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+    /* ══ Campus Image Placeholder ══ */
+    .campus-placeholder {
+      width:100%; min-height:400px;
+      background:linear-gradient(135deg,#1e293b,#0f3460);
+      border-radius:var(--radius-lg);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      color:#fff; position:relative; overflow:hidden;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size:2rem; }
+      .hero-stat-card { border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); }
+      .hero-stats .row > [class*="col"]:last-child .hero-stat-card { border-bottom:none; }
+      .newsletter-form { flex-direction:column; }
+      .newsletter-form input { min-width:100%; }
+      .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
+      .wa-popup { width:260px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ Loading Screen ══ -->
+  <div id="loading-screen">
+    <div class="loader-logo">EduVerse<span>.</span></div>
+    <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+  </div>
+
+  <!-- ══ Navbar ══ -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="nav-logo" href="#">Edu<span>Verse</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+          <button class="dark-toggle" id="darkToggle" title="Toggle Dark Mode">🌙</button>
+          <a href="contact.html" class="btn-primary-custom">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ Hero Section ══ -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-slide active" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);"></div>
+      <div class="hero-slide" style="background:linear-gradient(135deg,#0d0d0d 0%,#1a1a2e 50%,#2d1b69 100%);"></div>
+      <div class="hero-slide" style="background:linear-gradient(135deg,#0a0a23 0%,#0d2137 50%,#1a3a5c 100%);"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-graduation-cap"></i> NAAC 'A+' Accredited Institution
+      </div>
+      <h1>Shape Your Future at<br><span style="color:var(--accent)">EduVerse</span> College</h1>
+      <p>Empowering minds with <strong class="typing-text" id="typingText">world-class education</strong></p>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="contact.html" class="btn-white-custom"><i class="fas fa-paper-plane"></i> Apply Now</a>
+        <a href="courses.html" class="btn-ghost-white"><i class="fas fa-compass"></i> Explore Courses</a>
+      </div>
+    </div>
+
+    <div class="hero-dots">
+      <div class="hero-dot active" onclick="goToSlide(0)"></div>
+      <div class="hero-dot" onclick="goToSlide(1)"></div>
+      <div class="hero-dot" onclick="goToSlide(2)"></div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-md-3">
+            <div class="hero-stat-card reveal-zoom">
+              <div class="num" data-count="15000">0</div>
+              <div class="label">Students Enrolled</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="hero-stat-card reveal-zoom">
+              <div class="num" data-count="350">0</div>
+              <div class="label">Expert Faculty</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="hero-stat-card reveal-zoom">
+              <div class="num" data-count="96">0</div>
+              <div class="label">% Placement Rate</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="hero-stat-card reveal-zoom">
+              <div class="num" data-count="50">0</div>
+              <div class="label">Years of Excellence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Features – Why EduVerse ══ -->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5 reveal">
+        <span class="section-badge">Why EduVerse</span>
+        <h2 class="section-title">Education Designed for <span class="gradient-text">Tomorrow</span></h2>
+        <p class="section-desc">We blend tradition with innovation to create an environment where students thrive academically and personally.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon"><i class="fas fa-brain"></i></div>
+            <h3>Smart Learning</h3>
+            <p>AI-powered personalised learning paths tailored to each student's pace and style.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon"><i class="fas fa-globe"></i></div>
+            <h3>Global Exposure</h3>
+            <p>International exchange programmes with 120+ partner universities worldwide.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon"><i class="fas fa-flask"></i></div>
+            <h3>Research Labs</h3>
+            <p>State-of-the-art laboratories equipped with the latest tools for hands-on research.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon"><i class="fas fa-briefcase"></i></div>
+            <h3>Career Support</h3>
+            <p>Dedicated placement cell connecting students with top global companies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Stats Counter ══ -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row g-0 text-center">
+        <div class="col-6 col-md-3">
+          <div class="stat-item reveal-zoom">
+            <div class="num"><span data-count="150">0</span><span class="plus">+</span></div>
+            <div class="label">Courses Offered</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item reveal-zoom">
+            <div class="num"><span data-count="500">0</span><span class="plus">+</span></div>
+            <div class="label">Industry Partners</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item reveal-zoom">
+            <div class="num"><span data-count="120">0</span><span class="plus">+</span></div>
+            <div class="label">Global Partner Universities</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item reveal-zoom">
+            <div class="num"><span data-count="45000">0</span><span class="plus">+</span></div>
+            <div class="label">Alumni Worldwide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Popular Courses ══ -->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 reveal">
+        <div>
+          <span class="section-badge">Popular Courses</span>
+          <h2 class="section-title mb-0">Find Your <span class="gradient-text">Perfect Program</span></h2>
+        </div>
+        <a href="courses.html" class="btn-outline-custom">View All Courses <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="course-card">
+            <div class="course-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4rem;">💻</div>
+              <span class="course-badge">Engineering</span>
+            </div>
+            <div class="course-body">
+              <h3>B.Tech Computer Science & Engineering</h3>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 4 Years</span>
+                <span><i class="fas fa-users"></i> 240 Seats</span>
+                <span><i class="fas fa-star" style="color:var(--accent)"></i> 4.9</span>
+              </div>
+              <p>Master algorithms, AI, software development, and cutting-edge technologies.</p>
+            </div>
+            <div class="course-footer">
+              <div class="course-price">₹1,20,000 <small>/year</small></div>
+              <a href="courses.html" class="btn-primary-custom" style="padding:0.4rem 1rem;font-size:0.82rem;">Enroll Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="course-card">
+            <div class="course-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:4rem;">🧠</div>
+              <span class="course-badge">Science</span>
+            </div>
+            <div class="course-body">
+              <h3>M.Sc Artificial Intelligence & Data Science</h3>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 2 Years</span>
+                <span><i class="fas fa-users"></i> 120 Seats</span>
+                <span><i class="fas fa-star" style="color:var(--accent)"></i> 4.8</span>
+              </div>
+              <p>Deep dive into machine learning, neural networks, and big data analytics.</p>
+            </div>
+            <div class="course-footer">
+              <div class="course-price">₹90,000 <small>/year</small></div>
+              <a href="courses.html" class="btn-primary-custom" style="padding:0.4rem 1rem;font-size:0.82rem;">Enroll Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="course-card">
+            <div class="course-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#10b981,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4rem;">📊</div>
+              <span class="course-badge">Management</span>
+            </div>
+            <div class="course-body">
+              <h3>MBA Business Administration</h3>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 2 Years</span>
+                <span><i class="fas fa-users"></i> 180 Seats</span>
+                <span><i class="fas fa-star" style="color:var(--accent)"></i> 4.7</span>
+              </div>
+              <p>Build leadership, strategic thinking, and management expertise.</p>
+            </div>
+            <div class="course-footer">
+              <div class="course-price">₹1,50,000 <small>/year</small></div>
+              <a href="courses.html" class="btn-primary-custom" style="padding:0.4rem 1rem;font-size:0.82rem;">Enroll Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Why Choose Us (Detail) ══ -->
+  <section class="py-5" style="background:var(--light);">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal-left">
+          <div class="campus-placeholder">
+            <span style="font-size:6rem;">🏛️</span>
+            <p style="opacity:0.8;margin-top:1rem;">EduVerse Campus</p>
+            <div class="experience-badge">
+              <div class="num">50+</div>
+              <p style="margin:0;font-size:0.78rem;opacity:0.85;">Years of Excellence</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal-right">
+          <span class="section-badge">Why Choose Us</span>
+          <h2 class="section-title">A College That Truly <span class="gradient-text">Cares</span></h2>
+          <p class="mb-4" style="color:var(--gray);">EduVerse isn't just an institution — it's a launchpad. We combine rigorous academics with real-world exposure and mentorship that matters.</p>
+          <ul class="check-list">
+            <li class="check-item"><div class="check">✓</div><p><strong>NAAC 'A+' Accredited</strong> with consistent top-tier rankings across national surveys.</p></li>
+            <li class="check-item"><div class="check">✓</div><p><strong>Industry-aligned curriculum</strong> updated every semester with input from 500+ hiring partners.</p></li>
+            <li class="check-item"><div class="check">✓</div><p><strong>1:20 faculty-student ratio</strong> ensuring personalised guidance and mentorship.</p></li>
+            <li class="check-item"><div class="check">✓</div><p><strong>₹28 LPA highest package</strong> offered to graduates in the last placement drive.</p></li>
+            <li class="check-item"><div class="check">✓</div><p><strong>100+ research publications</strong> per year by our faculty and students combined.</p></li>
+          </ul>
+          <a href="about.html" class="btn-primary-custom">Discover More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Faculty Highlights ══ -->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5 reveal">
+        <span class="section-badge">Expert Faculty</span>
+        <h2 class="section-title">Learn from the <span class="gradient-text">Best Minds</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="faculty-card">
+            <div class="faculty-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:5rem;">👨‍💼</div>
+              <div class="faculty-overlay">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+            <div class="faculty-body">
+              <h3>Dr. Arjun Sharma</h3>
+              <p class="dept">Computer Science</p>
+              <p>PhD from IIT Delhi · 20 years industry + academia experience</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="faculty-card">
+            <div class="faculty-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:5rem;">👩‍🔬</div>
+              <div class="faculty-overlay">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+            <div class="faculty-body">
+              <h3>Prof. Priya Nair</h3>
+              <p class="dept">Artificial Intelligence</p>
+              <p>Former Google Research Scientist · 50+ publications</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="faculty-card">
+            <div class="faculty-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#10b981,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:5rem;">👨‍🏫</div>
+              <div class="faculty-overlay">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+            <div class="faculty-body">
+              <h3>Dr. Rahul Verma</h3>
+              <p class="dept">Management Studies</p>
+              <p>MBA Harvard · Consultant for Fortune 500 companies</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="faculty-card">
+            <div class="faculty-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:5rem;">👩‍💻</div>
+              <div class="faculty-overlay">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+            <div class="faculty-body">
+              <h3>Dr. Sneha Patel</h3>
+              <p class="dept">Data Science</p>
+              <p>PhD MIT · AI researcher and published author</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="faculty.html" class="btn-outline-custom">Meet All Faculty <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Testimonials ══ -->
+  <section class="py-5" style="background:var(--light);">
+    <div class="container py-4">
+      <div class="text-center mb-5 reveal">
+        <span class="section-badge">Testimonials</span>
+        <h2 class="section-title">What Our <span class="gradient-text">Students Say</span></h2>
+      </div>
+      <div class="row g-4" id="testimonialRow">
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="text">"EduVerse completely transformed my career. The faculty are incredibly supportive and the placement cell helped me land a job at Amazon straight after graduation!"</p>
+            <div class="testimonial-author">
+              <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">😊</div>
+              <div>
+                <div class="name">Rahul Mehta</div>
+                <div class="role">B.Tech CSE · Amazon SDE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="text">"The research facilities here are world-class. I published two papers during my M.Sc and got a scholarship for my PhD abroad. Best decision of my life!"</p>
+            <div class="testimonial-author">
+              <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🌟</div>
+              <div>
+                <div class="name">Anika Singh</div>
+                <div class="role">M.Sc AI · PhD Scholar, MIT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="text">"MBA at EduVerse gave me the business acumen and network I needed. I founded my startup 6 months after graduating and we've raised ₹2 Cr in funding!"</p>
+            <div class="testimonial-author">
+              <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#10b981,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🚀</div>
+              <div>
+                <div class="name">Vikram Joshi</div>
+                <div class="role">MBA · Founder, TechVenture</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="testimonial-card">
+            <div class="stars">★★★★☆</div>
+            <p class="text">"The campus life is electric! From hackathons to cultural fests, there's always something happening. The hostel facilities are excellent too."</p>
+            <div class="testimonial-author">
+              <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">💫</div>
+              <div>
+                <div class="name">Priti Desai</div>
+                <div class="role">B.Com · Chartered Accountant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Blog / News ══ -->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 reveal">
+        <div>
+          <span class="section-badge">Latest News</span>
+          <h2 class="section-title mb-0">Campus <span class="gradient-text">Highlights</span></h2>
+        </div>
+        <a href="#" class="btn-outline-custom">View All News <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 reveal">
+          <div class="blog-card">
+            <div class="blog-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4rem;">🏆</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="fas fa-calendar"></i> May 15, 2025</span>
+                <span><i class="fas fa-tag"></i> Achievement</span>
+              </div>
+              <h3>EduVerse Ranked #3 in National University Rankings 2025</h3>
+              <p>NIRF rankings place EduVerse among top engineering institutions for the 5th consecutive year...</p>
+              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="blog-card">
+            <div class="blog-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:4rem;">🤝</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="fas fa-calendar"></i> Apr 28, 2025</span>
+                <span><i class="fas fa-tag"></i> Partnership</span>
+              </div>
+              <h3>EduVerse Signs MoU with Google for AI Research Collaboration</h3>
+              <p>Landmark agreement opens doors to internships, cloud credits, and joint AI research programs...</p>
+              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="blog-card">
+            <div class="blog-img">
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#10b981,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4rem;">💡</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="fas fa-calendar"></i> Apr 12, 2025</span>
+                <span><i class="fas fa-tag"></i> Innovation</span>
+              </div>
+              <h3>Students Win National Hackathon with Smart Agriculture IoT Solution</h3>
+              <p>Team CodeVerse bags ₹10 lakh prize at national-level Smart India Hackathon 2025...</p>
+              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Newsletter ══ -->
+  <section class="newsletter-section">
+    <div class="container reveal-zoom">
+      <h2>Stay Updated with EduVerse</h2>
+      <p>Subscribe to get the latest news, events, and admission updates delivered to your inbox.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="Enter your email address..." required />
+        <button type="submit" class="btn-white-custom">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══ Footer ══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <a href="#" class="nav-logo" style="color:#fff;">Edu<span>Verse</span></a>
+            <p>EduVerse College of Excellence — nurturing talent, fostering innovation, and creating leaders who shape the future.</p>
+            <div class="social-links">
+              <a href="#" class="social-link-footer"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link-footer"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link-footer"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link-footer"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="social-link-footer"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-4">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="faculty.html">Faculty</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-4">
+          <h4>Programs</h4>
+          <ul class="footer-links">
+            <li><a href="courses.html">B.Tech Engineering</a></li>
+            <li><a href="courses.html">MBA Programs</a></li>
+            <li><a href="courses.html">M.Sc Sciences</a></li>
+            <li><a href="courses.html">BCA / MCA</a></li>
+            <li><a href="courses.html">B.Com / M.Com</a></li>
+            <li><a href="courses.html">PhD Programs</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-4">
+          <h4>Contact</h4>
+          <ul class="footer-contact">
+            <li><i class="fas fa-map-marker-alt"></i><span>123 University Road, Knowledge Park, New Delhi – 110001</span></li>
+            <li><i class="fas fa-phone"></i><span>+91 11 2345 6789</span></li>
+            <li><i class="fas fa-envelope"></i><span>admissions@eduverse.edu.in</span></li>
+            <li><i class="fas fa-clock"></i><span>Mon–Sat: 9:00 AM – 5:00 PM</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 EduVerse College. All rights reserved.</p>
+        <p>Designed with ❤️ for <a href="#">College Project</a></p>
+        <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ WhatsApp Float ══ -->
+  <div class="wa-float">
+    <div class="wa-popup" id="waPopup">
+      <div class="wa-popup-header">
+        <div class="wa-avatar">💬</div>
+        <div>
+          <h4>EduVerse Support</h4>
+          <p>Typically replies in minutes</p>
+        </div>
+      </div>
+      <div class="wa-popup-body">
+        <label>Your Name</label>
+        <input id="waName" type="text" placeholder="Enter your name..." />
+        <label>Message</label>
+        <textarea id="waMsg" rows="3" placeholder="How can we help you?"></textarea>
+        <button class="wa-send-btn" onclick="sendWA()">
+          <i class="fab fa-whatsapp"></i> Send on WhatsApp
+        </button>
+      </div>
+    </div>
+    <button class="wa-btn" id="waToggle" title="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </button>
+  </div>
+
+  <!-- ══ Back to Top ══ -->
+  <button id="back-to-top" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Loading Screen
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading-screen').classList.add('hidden');
+        setTimeout(() => document.getElementById('loading-screen').remove(), 600);
+      }, 1800);
+    });
+
+    // Dark Mode Toggle
+    const darkToggle = document.getElementById('darkToggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    darkToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    darkToggle.addEventListener('click', () => {
+      const cur = html.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      darkToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Hero Slideshow
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    function goToSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+
+    // Typing Effect
+    const typingTexts = ["world-class education","cutting-edge research","innovative programs","global opportunities"];
+    let tIdx = 0, cIdx = 0, deleting = false;
+    const typingEl = document.getElementById('typingText');
+    function type() {
+      const cur = typingTexts[tIdx];
+      typingEl.textContent = deleting ? cur.substring(0, cIdx--) : cur.substring(0, cIdx++);
+      if (!deleting && cIdx > cur.length) { deleting = true; setTimeout(type, 1500); return; }
+      if (deleting && cIdx < 0) { deleting = false; tIdx = (tIdx + 1) % typingTexts.length; }
+      setTimeout(type, deleting ? 60 : 100);
+    }
+    type();
+
+    // Counter Animation
+    function animateCount(el) {
+      const target = +el.dataset.count;
+      const dur = 2000;
+      const step = target / (dur / 16);
+      let cur = 0;
+      const timer = setInterval(() => {
+        cur += step;
+        if (cur >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); return; }
+        el.textContent = Math.floor(cur).toLocaleString();
+      }, 16);
+    }
+
+    // Scroll Reveal + Counter trigger
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal, .reveal-zoom, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Back to Top
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('show', window.scrollY > 400);
+    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // WhatsApp Popup
+    const waToggle = document.getElementById('waToggle');
+    const waPopup = document.getElementById('waPopup');
+    waToggle.addEventListener('click', () => waPopup.classList.toggle('show'));
+    function sendWA() {
+      const name = document.getElementById('waName').value.trim();
+      const msg = document.getElementById('waMsg').value.trim();
+      if (!name || !msg) { alert('Please fill in both fields.'); return; }
+      const text = encodeURIComponent(`Hi, I'm ${name}. ${msg}`);
+      window.open(`https://wa.me/911123456789?text=${text}`, '_blank');
+    }
+  </script>
+</body>
+</html>
